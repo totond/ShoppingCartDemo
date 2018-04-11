@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="yanzhikai.shoppingcartdemo.ShoppingCartFragment">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cart_top_bar_height"
+        android:id="@+id/top_bar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/shopping_cart_title"
+            style="@style/CartTitleText"/>
+    </RelativeLayout>
+
+    <com.aitsuki.swipe.SwipeMenuRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_bar"
+        android:layout_above="@+id/bottom_bar"
+        android:id="@+id/rv_shopping_cart">
+    </com.aitsuki.swipe.SwipeMenuRecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cart_bottom_bar_height"
+        android:paddingLeft="@dimen/cart_bottom_bar_padding_start"
+        android:paddingRight="@dimen/cart_bottom_bar_padding_end"
+        android:id="@+id/bottom_bar"
+        android:layout_alignParentBottom="true"
+        >
+
+        <yanzhikai.shoppingcartdemo.widget.SwitchView
+            android:layout_width="@dimen/cart_switch_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/sw_choose_all"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shopping_cart_choose_all"
+            style="@style/CartBottomText"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/cart_bottom_bar_margin"
+            android:layout_toEndOf="@+id/sw_choose_all"
+            android:layout_toRightOf="@+id/sw_choose_all" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_total_price"
+            android:gravity="end"
+            style="@style/CartBottomPriceText"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shopping_cart_total"
+            style="@style/CartBottomPriceText"
+            android:layout_toStartOf="@+id/tv_total_price"
+            android:layout_toLeftOf="@+id/tv_total_price"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>

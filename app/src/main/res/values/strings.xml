@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ShoppingCartDemo</string>
+
+
+    <string name="shopping_cart_title">购物车</string>
+    <string name="shopping_cart_delete">删除</string>
+    <string name="shopping_cart_choose_all">全选</string>
+    <string name="shopping_cart_total">合计：</string>
+    <string name="shopping_cart_unit">元</string>
+    <string name="shopping_cart_price_total">%s元</string>
+    <string name="shopping_cart_no_content">你的购物车空空如也！</string>
+
+
+</resources>

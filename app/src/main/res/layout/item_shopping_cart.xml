@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/cart_item_padding_start"
+    android:paddingEnd="@dimen/cart_item_padding_end"
+    android:background="@android:color/white"
+    android:paddingLeft="@dimen/cart_item_padding_start"
+    android:paddingRight="@dimen/cart_item_padding_end">
+
+    <yanzhikai.shoppingcartdemo.widget.SwitchView
+        android:id="@+id/sw_item"
+        android:layout_width="@dimen/cart_switch_width"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/tv_commodity_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/CartItemNameText"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/cart_item_name_margin"
+        android:layout_toEndOf="@+id/sw_item"
+        android:layout_toRightOf="@+id/sw_item" />
+
+    <TextView
+        android:id="@+id/tv_price_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shopping_cart_unit"
+        style="@style/CartItemPriceText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/tv_price_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        style="@style/CartItemPriceText"
+        android:layout_toStartOf="@+id/tv_price_unit"
+        android:layout_toLeftOf="@+id/tv_price_unit" />
+</RelativeLayout>
