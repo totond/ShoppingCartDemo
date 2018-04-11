@@ -35,4 +35,7 @@
         <item name="android:textColor">@color/colorCartPrice</item>
     </style>
 
+    <declare-styleable name="EmptyLayout">
+        <attr name="background_color" format="color" />
+    </declare-styleable>
 </resources>

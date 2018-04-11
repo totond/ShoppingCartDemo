@@ -10,5 +10,8 @@
     <string name="shopping_cart_price_total">%s元</string>
     <string name="shopping_cart_no_content">你的购物车空空如也！</string>
 
+    <string name="string_error">数据获取遇到问题，请检查网络后重试！</string>
+    <string name="string_retry">重试</string>
+
 
 </resources>

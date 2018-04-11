@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aitsuki.swipe.SwipeMenuRecyclerView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
+import yanzhikai.shoppingcartdemo.base.BaseFragment;
+import yanzhikai.shoppingcartdemo.widget.EmptyLayout;
 import yanzhikai.shoppingcartdemo.widget.SwitchView;
 
 
@@ -57,7 +54,6 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
     protected void loadData() {
         mShoppingCartPresenter = new ShoppingCartPresenter(this);
         mShoppingCartPresenter.bindData();
-        Log.d(TAG, "loadData: ");
     }
 
     @Override
@@ -68,10 +64,15 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
     @Override
     protected void initViews() {
         rvShoppingCart.setLayoutManager(new LinearLayoutManager(getContext()));
-        Log.d(TAG, "initViews: ");
         //设置分界线
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rvShoppingCart.addItemDecoration(itemDecoration);
+        showNetError(new EmptyLayout.OnRetryListener() {
+            @Override
+            public void onRetry() {
+                hideLoading();
+            }
+        });
     }
 
     @Override
@@ -127,4 +128,5 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
     public void onViewClicked() {
         mShoppingCartPresenter.chooseAllOrNone(swChooseAll.isOpened());
     }
+
 }

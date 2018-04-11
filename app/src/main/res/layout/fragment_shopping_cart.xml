@@ -76,6 +76,11 @@
             />
     </RelativeLayout>
 
+    <yanzhikai.shoppingcartdemo.widget.EmptyLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/empty_layout">
 
+    </yanzhikai.shoppingcartdemo.widget.EmptyLayout>
 
 </RelativeLayout>

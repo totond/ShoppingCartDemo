@@ -63,7 +63,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             cartItemViewHolder.sw_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick: sw_item");
                     ShoppingCartEntity.CommodityEntity commodityEntity = mData.get((Integer) v.getTag());
                     commodityEntity.setChosen(!commodityEntity.isChosen());
                     if (mDataChangedListener != null){
