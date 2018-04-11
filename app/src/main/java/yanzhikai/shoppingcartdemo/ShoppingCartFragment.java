@@ -98,12 +98,13 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
             }
         });
         rvShoppingCart.setAdapter(mShoppingCartAdapter);
-        refreshBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+        updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
     }
 
     @Override
-    public void refreshData(int index) {
-        mShoppingCartAdapter.notifyDataSetChanged();
+    public void deleteCommodity(int index) {
+        mShoppingCartAdapter.notifyItemRemoved(index);
+        mShoppingCartAdapter.notifyItemRangeChanged(index,mShoppingCartAdapter.getItemCount() - index);
     }
 
     @Override
@@ -112,8 +113,8 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
     }
 
     @Override
-    public void refreshBottomUI(boolean isChosenAll, float totalPrice) {
-        Log.d(TAG, "refreshBottomUI: ");
+    public void updateBottomUI(boolean isChosenAll, float totalPrice) {
+        Log.d(TAG, "updateBottomUI: ");
         swChooseAll.setOpened(isChosenAll);
         tvTotalPrice.setText(String.format(getString(R.string.shopping_cart_price_total), NumberUtil.floatToStringWith1Bit(totalPrice)));
     }

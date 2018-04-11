@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import yanzhikai.shoppingcartdemo.widget.SwitchView;
+import yanzhikai.shoppingcartdemo.ShoppingCartEntity.CommodityEntity;
 
 /**
  * author : yany
@@ -26,14 +29,14 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private boolean isDataNull = false;
 
     @NonNull
-    private ShoppingCartEntity mData;
+    private ArrayList<CommodityEntity> mData;
 
     private static final int ITEM_TYPE_NONE = 0;
     private static final int ITEM_TYPE_CONTENT = 1;
 
     public ShoppingCartAdapter(@NonNull ShoppingCartEntity entity) {
         super();
-        mData = entity;
+        mData = entity.getCommodities();
     }
 
     @Override
@@ -54,21 +57,21 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             cartItemViewHolder.sw_item.setTag(position);
             cartItemViewHolder.right_menu.setTag(position);
 
-            cartItemViewHolder.tv_commodity_name.setText(mData.getCommodities().get(position).getName());
-            cartItemViewHolder.tv_price_number.setText(String.valueOf(mData.getCommodities().get(position).getPrice()));
+            cartItemViewHolder.tv_commodity_name.setText(mData.get(position).getName());
+            cartItemViewHolder.tv_price_number.setText(String.valueOf(mData.get(position).getPrice()));
 
             cartItemViewHolder.sw_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "onClick: sw_item");
-                    ShoppingCartEntity.CommodityEntity commodityEntity = mData.getCommodities().get((Integer) v.getTag());
+                    ShoppingCartEntity.CommodityEntity commodityEntity = mData.get((Integer) v.getTag());
                     commodityEntity.setChosen(!commodityEntity.isChosen());
                     if (mDataChangedListener != null){
                         mDataChangedListener.onChosenChanged();
                     }
                 }
             });
-            cartItemViewHolder.sw_item.setOpened(mData.getCommodities().get(position).isChosen());
+            cartItemViewHolder.sw_item.setOpened(mData.get(position).isChosen());
             cartItemViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,7 +96,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         //支持数据为空时显示空Item
-        int size = mData.getCommodities().size();
+        int size = mData.size();
         if (size > 0){
             //只在非空的第一次回调
             if (isDataNull && mDataChangedListener != null){
@@ -112,7 +115,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        if (mData.getCommodities().size() <= 0) {
+        if (mData.size() <= 0) {
             return ITEM_TYPE_NONE;
         } else {
             return ITEM_TYPE_CONTENT;
@@ -148,12 +151,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    /**
-     * author : yany
-     * e-mail : yanzhikai_yjk@qq.com
-     * time   : 2018/04/09
-     * desc   :
-     */
 
     public interface OnItemClickListener {
         void onItemClick(int position);

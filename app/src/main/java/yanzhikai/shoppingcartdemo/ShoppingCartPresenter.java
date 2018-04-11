@@ -1,7 +1,6 @@
 package yanzhikai.shoppingcartdemo;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 /**
  * author : yany
@@ -32,14 +31,14 @@ public class ShoppingCartPresenter implements ShoppingCartContract.IShoppingCarP
     public void deleteCommodity(int index) {
         mDataSource.deleteCommodity(index);
         //假设删除成功的话
-        mShoppingCartView.refreshData(index);
+        mShoppingCartView.deleteCommodity(index);
         dataStateChanged();
     }
 
     @Override
     public void dataStateChanged() {
         ShoppingCartEntity entity = mDataSource.handleDataChanged();
-        mShoppingCartView.refreshBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+        mShoppingCartView.updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
     }
 
 

@@ -18,13 +18,13 @@ public interface ShoppingCartContract {
         void bindData(ShoppingCartEntity entity);
 
         //刷新数据
-        void refreshData(int index);
+        void deleteCommodity(int index);
 
         //全选
         void chooseAll();
 
         //刷新底部显示数据
-        void refreshBottomUI(boolean isChosenAll, float totalPrice);
+        void updateBottomUI(boolean isChosenAll, float totalPrice);
 
         //提交购物车数据
 //        void commitCartData();
