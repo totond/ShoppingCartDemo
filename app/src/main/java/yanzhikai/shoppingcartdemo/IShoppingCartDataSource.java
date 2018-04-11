@@ -15,11 +15,13 @@ public interface IShoppingCartDataSource {
 
     Observable<ShoppingCartEntity> getDataFromRemote();
 
-    void deleteCommodity(int index);
+    Observable<ShoppingCartEntity> deleteCommodity(int index);
 
     Observable<ShoppingCartEntity> handleDataChanged();
 
     ShoppingCartEntity chooseAll();
 
     ShoppingCartEntity chooseNone();
+
+    Observable<ShoppingCartEntity> requestDelay(Observable<ShoppingCartEntity> dataObservable);
 }

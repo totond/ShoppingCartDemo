@@ -80,6 +80,7 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
 
             @Override
             public void onRightMenuClick(int position) {
+                Log.d(TAG, "onRightMenuClick: ");
                 mShoppingCartPresenter.deleteCommodity(position);
             }
         });

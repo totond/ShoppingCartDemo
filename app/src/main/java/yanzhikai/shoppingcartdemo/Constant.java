@@ -9,5 +9,5 @@ package yanzhikai.shoppingcartdemo;
 
 public class Constant {
     //模拟网络请求延时
-    public static final int DELAY_TIME = 3000;
+    public static final int DELAY_TIME = 5000;
 }

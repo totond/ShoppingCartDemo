@@ -52,16 +52,30 @@ public class ShoppingCartPresenter implements ShoppingCartContract.IShoppingCarP
     }
 
     @Override
-    public void deleteCommodity(int index) {
-        mDataSource.deleteCommodity(index);
-        //假设删除成功的话
-        mShoppingCartView.deleteCommodity(index);
-        dataStateChanged();
+    public void deleteCommodity(final int index) {
+        mDataSource.requestDelay(mDataSource.deleteCommodity(index))
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mShoppingCartView.showLoading();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ShoppingCartEntity>() {
+                    @Override
+                    public void accept(ShoppingCartEntity entity) throws Exception {
+                        mShoppingCartView.hideLoading();
+                        mShoppingCartView.deleteCommodity(index);
+                        mShoppingCartView.updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+                    }
+                });
     }
 
     @Override
     public void dataStateChanged() {
-        mDataSource.getDataFromRemote()
+        mDataSource.requestDelay(mDataSource.handleDataChanged())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

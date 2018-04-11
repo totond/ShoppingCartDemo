@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
 import yanzhikai.shoppingcartdemo.ShoppingCartEntity.CommodityEntity;
 
 /**
@@ -31,17 +33,17 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
         commodityEntities.add(new CommodityEntity("高等数学", 30.6f, false));
         commodityEntities.add(new CommodityEntity("大学语文", 35.0f, true));
         mData.setCommodities(commodityEntities);
-        return handleDataChanged().delay(Constant.DELAY_TIME, TimeUnit.MILLISECONDS);
+        return handleDataChanged();
     }
 
     @Override
-    public void deleteCommodity(int index) {
+    public Observable<ShoppingCartEntity> deleteCommodity(int index) {
         mData.getCommodities().remove(index);
+        return handleDataChanged();
     }
 
     @Override
     public Observable<ShoppingCartEntity> handleDataChanged() {
-        Log.d(TAG, "handleDataChanged: ");
         ArrayList<CommodityEntity> commodityEntities = mData.getCommodities();
         float totalPrice = 0;
         boolean chosenAll = true;
@@ -53,6 +55,7 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
         }
         mData.setTotalPrice(totalPrice);
         mData.setIsChosenAll(chosenAll);
+        Log.d(TAG, "handleDataChanged: " + totalPrice);
         return Observable.just(mData);
     }
 
@@ -78,6 +81,19 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
         mData.setTotalPrice(0);
         mData.setIsChosenAll(false);
         return mData;
+    }
+
+    @Override
+    public Observable<ShoppingCartEntity> requestDelay(final Observable<ShoppingCartEntity> dataObservable) {
+
+        return Observable.just(true)
+                .delay(Constant.DELAY_TIME, TimeUnit.MILLISECONDS)
+                .flatMap(new Function<Boolean, ObservableSource<ShoppingCartEntity>>() {
+                    @Override
+                    public ObservableSource<ShoppingCartEntity> apply(Boolean aLong) throws Exception {
+                        return dataObservable;
+                    }
+                });
     }
 
 
