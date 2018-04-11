@@ -5,12 +5,12 @@
 
     <TextView
         android:id="@+id/right_menu"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/cart_item_right_menu_width"
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:background="@android:color/holo_red_light"
         android:gravity="center"
-        android:text="right"
+        android:text="@string/shopping_cart_delete"
         android:textColor="@android:color/white"/>
 
     <include layout="@layout/item_shopping_cart"/>

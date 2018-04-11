@@ -17,4 +17,8 @@ public interface IShoppingCartDataSource {
     void deleteCommodity(int index);
 
     ShoppingCartEntity handleDataChanged();
+
+    ShoppingCartEntity chooseAll();
+
+    ShoppingCartEntity chooseNone();
 }

@@ -5,11 +5,17 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aitsuki.swipe.SwipeMenuRecyclerView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import yanzhikai.shoppingcartdemo.widget.SwitchView;
 
 
@@ -79,7 +85,6 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
 
             @Override
             public void onRightMenuClick(int position) {
-                Log.d(TAG, "onRightMenuClick: " + position);
                 mShoppingCartPresenter.deleteCommodity(position);
             }
         });
@@ -87,7 +92,6 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
         mShoppingCartAdapter.setOnDataChangedListener(new ShoppingCartAdapter.OnDataChangedListener() {
             @Override
             public void onChosenChanged() {
-                Log.d(TAG, "onChosenChanged: ");
                 mShoppingCartPresenter.dataStateChanged();
             }
 
@@ -98,25 +102,29 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
             }
         });
         rvShoppingCart.setAdapter(mShoppingCartAdapter);
-        updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+        updateBottomUI(entity.isIsChosenAll(), entity.getTotalPrice());
+    }
+
+    @Override
+    public void updateData() {
+        mShoppingCartAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void deleteCommodity(int index) {
         mShoppingCartAdapter.notifyItemRemoved(index);
-        mShoppingCartAdapter.notifyItemRangeChanged(index,mShoppingCartAdapter.getItemCount() - index);
+        mShoppingCartAdapter.notifyItemRangeChanged(index, mShoppingCartAdapter.getItemCount() - index);
     }
 
-    @Override
-    public void chooseAll() {
-//        mShoppingCartPresenter.
-    }
 
     @Override
     public void updateBottomUI(boolean isChosenAll, float totalPrice) {
-        Log.d(TAG, "updateBottomUI: ");
         swChooseAll.setOpened(isChosenAll);
         tvTotalPrice.setText(String.format(getString(R.string.shopping_cart_price_total), NumberUtil.floatToStringWith1Bit(totalPrice)));
     }
 
+    @OnClick(R.id.sw_choose_all)
+    public void onViewClicked() {
+        mShoppingCartPresenter.chooseAllOrNone(swChooseAll.isOpened());
+    }
 }

@@ -17,11 +17,11 @@ public interface ShoppingCartContract {
         //绑定商品数据
         void bindData(ShoppingCartEntity entity);
 
-        //刷新数据
-        void deleteCommodity(int index);
+        //刷新全部商品数据
+        void updateData();
 
-        //全选
-        void chooseAll();
+        //删除单个商品数据
+        void deleteCommodity(int index);
 
         //刷新底部显示数据
         void updateBottomUI(boolean isChosenAll, float totalPrice);
@@ -41,5 +41,7 @@ public interface ShoppingCartContract {
 
         void dataStateChanged();
 
+        //全选或者全不选
+        void chooseAllOrNone(boolean choose);
     }
 }

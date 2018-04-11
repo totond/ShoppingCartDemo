@@ -1,6 +1,7 @@
 package yanzhikai.shoppingcartdemo;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 /**
  * author : yany
@@ -41,6 +42,16 @@ public class ShoppingCartPresenter implements ShoppingCartContract.IShoppingCarP
         mShoppingCartView.updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
     }
 
-
+    @Override
+    public void chooseAllOrNone(boolean choose) {
+        ShoppingCartEntity entity;
+        if (choose){
+            entity = mDataSource.chooseAll();
+        }else {
+            entity = mDataSource.chooseNone();
+        }
+        mShoppingCartView.updateData();
+        mShoppingCartView.updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+    }
 
 }
