@@ -2,6 +2,8 @@ package yanzhikai.shoppingcartdemo;
 
 import java.util.ArrayList;
 
+import io.reactivex.Observable;
+
 /**
  * author : yany
  * e-mail : yanzhikai_yjk@qq.com
@@ -10,13 +12,12 @@ import java.util.ArrayList;
  */
 
 public interface IShoppingCartDataSource {
-    ShoppingCartEntity getDataFromRemote();
 
-    ShoppingCartEntity getDataFromLocal();
+    Observable<ShoppingCartEntity> getDataFromRemote();
 
     void deleteCommodity(int index);
 
-    ShoppingCartEntity handleDataChanged();
+    Observable<ShoppingCartEntity> handleDataChanged();
 
     ShoppingCartEntity chooseAll();
 

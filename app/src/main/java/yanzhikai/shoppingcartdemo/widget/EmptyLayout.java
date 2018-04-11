@@ -118,7 +118,7 @@ public class EmptyLayout extends FrameLayout {
     private void _switchEmptyView() {
         switch (mEmptyStatus) {
             case STATUS_LOADING:
-//                mHandleTouch = true;
+                mHandleTouch = true;
                 setVisibility(VISIBLE);
                 showBackground(false);
                 mRlEmptyContainer.setVisibility(GONE);

@@ -1,7 +1,11 @@
 package yanzhikai.shoppingcartdemo;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * author : yany
@@ -12,6 +16,8 @@ import android.util.Log;
 
 public class ShoppingCartPresenter implements ShoppingCartContract.IShoppingCarPresenter{
     public static final String TAG = "ShoppingCartPresenter";
+
+
 
 
     private final IShoppingCartDataSource mDataSource = new ShoppingCartShoppingCartDataSource();
@@ -25,7 +31,24 @@ public class ShoppingCartPresenter implements ShoppingCartContract.IShoppingCarP
 
     @Override
     public void bindData() {
-        mShoppingCartView.bindData(mDataSource.getDataFromLocal());
+        mDataSource.getDataFromRemote()
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mShoppingCartView.showLoading();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ShoppingCartEntity>() {
+                    @Override
+                    public void accept(ShoppingCartEntity entity) throws Exception {
+                        mShoppingCartView.hideLoading();
+                        mShoppingCartView.bindData(entity);
+                    }
+                });
+
     }
 
     @Override
@@ -38,8 +61,23 @@ public class ShoppingCartPresenter implements ShoppingCartContract.IShoppingCarP
 
     @Override
     public void dataStateChanged() {
-        ShoppingCartEntity entity = mDataSource.handleDataChanged();
-        mShoppingCartView.updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+        mDataSource.getDataFromRemote()
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        mShoppingCartView.showLoading();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ShoppingCartEntity>() {
+                    @Override
+                    public void accept(ShoppingCartEntity entity) throws Exception {
+                        mShoppingCartView.hideLoading();
+                        mShoppingCartView.updateBottomUI(entity.isIsChosenAll(),entity.getTotalPrice());
+                    }
+                });
     }
 
     @Override

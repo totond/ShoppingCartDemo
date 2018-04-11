@@ -67,12 +67,6 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
         //设置分界线
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rvShoppingCart.addItemDecoration(itemDecoration);
-        showNetError(new EmptyLayout.OnRetryListener() {
-            @Override
-            public void onRetry() {
-                hideLoading();
-            }
-        });
     }
 
     @Override

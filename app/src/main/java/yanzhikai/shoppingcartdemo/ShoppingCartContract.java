@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import yanzhikai.shoppingcartdemo.base.IBaseView;
+
 /**
  * author : yany
  * e-mail : yanzhikai_yjk@qq.com
@@ -13,7 +15,7 @@ import java.util.List;
 
 public interface ShoppingCartContract {
 
-    interface IShoppingCartView{
+    interface IShoppingCartView extends IBaseView{
         //绑定商品数据
         void bindData(ShoppingCartEntity entity);
 
