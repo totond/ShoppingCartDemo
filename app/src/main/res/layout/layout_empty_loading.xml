@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <yanzhikai.shoppingcartdemo.widget.LayoutLoadingView
+        <yanzhikai.shoppingcartdemo.widget.LoadingView
             android:id="@+id/empty_loading"
             android:layout_width="100dp"
             android:layout_height="100dp" />

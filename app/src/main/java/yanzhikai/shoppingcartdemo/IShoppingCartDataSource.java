@@ -13,15 +13,14 @@ import io.reactivex.Observable;
 
 public interface IShoppingCartDataSource {
 
-    Observable<ShoppingCartEntity> getDataFromRemote();
+    ShoppingCartEntity getDataFromRemote();
 
-    Observable<ShoppingCartEntity> deleteCommodity(int index);
+    ShoppingCartEntity deleteCommodity(int index);
 
-    Observable<ShoppingCartEntity> handleDataChanged();
+    ShoppingCartEntity handleDataChanged();
 
     ShoppingCartEntity chooseAll();
 
     ShoppingCartEntity chooseNone();
 
-    Observable<ShoppingCartEntity> requestDelay(Observable<ShoppingCartEntity> dataObservable);
 }

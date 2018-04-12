@@ -3,12 +3,8 @@ package yanzhikai.shoppingcartdemo;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
 import yanzhikai.shoppingcartdemo.ShoppingCartEntity.CommodityEntity;
+
 
 /**
  * author : yany
@@ -24,8 +20,7 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
 
 
     @Override
-    public Observable<ShoppingCartEntity> getDataFromRemote() {
-        Log.d(TAG, "getDataFromRemote: ");
+    public ShoppingCartEntity getDataFromRemote() {
         ArrayList<CommodityEntity> commodityEntities = new ArrayList<>();
         commodityEntities.add(new CommodityEntity("数据结构", 30.6f, false));
         commodityEntities.add(new CommodityEntity("C++程序基础", 35.0f, true));
@@ -37,13 +32,13 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
     }
 
     @Override
-    public Observable<ShoppingCartEntity> deleteCommodity(int index) {
+    public ShoppingCartEntity deleteCommodity(int index) {
         mData.getCommodities().remove(index);
         return handleDataChanged();
     }
 
     @Override
-    public Observable<ShoppingCartEntity> handleDataChanged() {
+    public ShoppingCartEntity handleDataChanged() {
         ArrayList<CommodityEntity> commodityEntities = mData.getCommodities();
         float totalPrice = 0;
         boolean chosenAll = true;
@@ -55,8 +50,7 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
         }
         mData.setTotalPrice(totalPrice);
         mData.setIsChosenAll(chosenAll);
-        Log.d(TAG, "handleDataChanged: " + totalPrice);
-        return Observable.just(mData);
+        return mData;
     }
 
     @Override
@@ -82,19 +76,5 @@ public class ShoppingCartShoppingCartDataSource implements IShoppingCartDataSour
         mData.setIsChosenAll(false);
         return mData;
     }
-
-    @Override
-    public Observable<ShoppingCartEntity> requestDelay(final Observable<ShoppingCartEntity> dataObservable) {
-
-        return Observable.just(true)
-                .delay(Constant.DELAY_TIME, TimeUnit.MILLISECONDS)
-                .flatMap(new Function<Boolean, ObservableSource<ShoppingCartEntity>>() {
-                    @Override
-                    public ObservableSource<ShoppingCartEntity> apply(Boolean aLong) throws Exception {
-                        return dataObservable;
-                    }
-                });
-    }
-
 
 }

@@ -38,7 +38,7 @@ public class EmptyLayout extends FrameLayout {
     private boolean mHandleTouch = false;
 
     @BindView(R.id.empty_loading)
-    LayoutLoadingView emptyLoading;
+    LoadingView emptyLoading;
     @BindView(R.id.tv_net_error)
     TextView mTvEmptyMessage;
     @BindView(R.id.rl_empty_container)
