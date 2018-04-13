@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import yanzhikai.shoppingcartdemo.util.DisplayUtil;
 import yanzhikai.shoppingcartdemo.R;
 
 /**
@@ -38,7 +37,7 @@ public class LoadingView extends View {
     public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.LoadingView, defStyleAttr, 0);
-        mSize = array.getDimensionPixelSize(R.styleable.LoadingView_loading_view_size, DisplayUtil.dp2px(context, 20));
+        mSize = array.getDimensionPixelSize(R.styleable.LoadingView_loading_view_size, 20);
         mPaintColor = array.getInt(R.styleable.LoadingView_android_color, Color.parseColor("#858C96"));
         array.recycle();
         initPaint();

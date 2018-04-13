@@ -21,7 +21,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/btn_nonetwork_layout_selector"
             android:gravity="center"
-            android:text="网络异常，点击重试"
+            android:text="@string/string_error"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
     </FrameLayout>
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@android:color/holo_red_light"
-            android:text="模拟网络延时"
+            android:text="@string/string_delay"
             />
 
     </LinearLayout>

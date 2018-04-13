@@ -147,10 +147,7 @@ public class EmptyLayout extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (mHandleTouch){
-            return true;
-        }
-        return super.onTouchEvent(event);
+        return mHandleTouch || super.onTouchEvent(event);
     }
 
     /**
