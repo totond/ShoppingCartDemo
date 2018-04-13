@@ -1,11 +1,11 @@
-package yanzhikai.shoppingcartdemo;
+package yanzhikai.shoppingcartdemo.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
- * Created by szhangbiao on 2018/2/22.
+ * Created by szhangbiao on 2018/2/22
  */
 
 public class DisplayUtil {

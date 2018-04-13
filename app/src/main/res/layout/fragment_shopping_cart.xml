@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="yanzhikai.shoppingcartdemo.ShoppingCartFragment">
+    tools:context="yanzhikai.shoppingcartdemo.shoppingcart.ShoppingCartFragment">
 
 
 
@@ -28,6 +28,13 @@
         android:layout_above="@+id/bottom_bar"
         android:id="@+id/rv_shopping_cart">
     </com.aitsuki.swipe.SwipeMenuRecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_above="@+id/bottom_bar"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

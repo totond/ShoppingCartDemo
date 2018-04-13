@@ -1,13 +1,11 @@
 package yanzhikai.shoppingcartdemo;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import yanzhikai.shoppingcartdemo.shoppingcart.ShoppingCartFragment;
 
 public class MainActivity extends AppCompatActivity {
 

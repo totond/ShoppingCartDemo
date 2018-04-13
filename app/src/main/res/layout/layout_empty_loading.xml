@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/empty_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -28,12 +29,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:gravity="center">
 
         <yanzhikai.shoppingcartdemo.widget.LoadingView
             android:id="@+id/empty_loading"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            app:loading_view_size="50dp"
+            android:color="@android:color/holo_red_light"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/holo_red_light"
+            android:text="模拟网络延时"
+            />
 
     </LinearLayout>
 

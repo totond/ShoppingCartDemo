@@ -1,22 +1,26 @@
-package yanzhikai.shoppingcartdemo;
+package yanzhikai.shoppingcartdemo.shoppingcart;
 
 
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.aitsuki.swipe.SwipeMenuRecyclerView;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import yanzhikai.shoppingcartdemo.util.NumberUtil;
+import yanzhikai.shoppingcartdemo.R;
 import yanzhikai.shoppingcartdemo.base.BaseFragment;
-import yanzhikai.shoppingcartdemo.widget.EmptyLayout;
 import yanzhikai.shoppingcartdemo.widget.SwitchView;
 
-
-public class ShoppingCartFragment extends BaseFragment implements ShoppingCartContract.IShoppingCartView {
+/**
+ * author : yany
+ * e-mail : yanzhikai_yjk@qq.com
+ * time   : 2018/04/09
+ * desc   : View层实现的Fragment，与用户交互界面，使用RecyclerView展示数据
+ */
+public class ShoppingCartFragment extends BaseFragment implements ShoppingCartContract.ShoppingCartView {
     public static final String TAG = "ShoppingCartFragment";
 //    public static final String DATA_LIST = "dataList";
 
@@ -28,7 +32,7 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
     TextView tvTotalPrice;
 
 
-    private ShoppingCartPresenter mShoppingCartPresenter;
+    private ShoppingCartPresenterImpl mShoppingCartPresenterImpl;
     private ShoppingCartAdapter mShoppingCartAdapter;
 
     public ShoppingCartFragment() {
@@ -52,8 +56,8 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
 
     @Override
     protected void loadData() {
-        mShoppingCartPresenter = new ShoppingCartPresenter(this);
-        mShoppingCartPresenter.bindData();
+        mShoppingCartPresenterImpl = new ShoppingCartPresenterImpl(this);
+        mShoppingCartPresenterImpl.bindData();
     }
 
     @Override
@@ -67,11 +71,23 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
         //设置分界线
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rvShoppingCart.addItemDecoration(itemDecoration);
+
+        swChooseAll.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
+            @Override
+            public void toggleToOn(SwitchView view) {
+                mShoppingCartPresenterImpl.chooseAllOrNone(true);
+            }
+
+            @Override
+            public void toggleToOff(SwitchView view) {
+                mShoppingCartPresenterImpl.chooseAllOrNone(false);
+            }
+        });
     }
 
     @Override
     public void bindData(ShoppingCartEntity entity) {
-        mShoppingCartAdapter = new ShoppingCartAdapter(entity);
+        mShoppingCartAdapter = new ShoppingCartAdapter(getActivity(),entity);
         mShoppingCartAdapter.setOnItemClickListener(new ShoppingCartAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -80,15 +96,14 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
 
             @Override
             public void onRightMenuClick(int position) {
-                Log.d(TAG, "onRightMenuClick: ");
-                mShoppingCartPresenter.deleteCommodity(position);
+                mShoppingCartPresenterImpl.deleteCommodity(position);
             }
         });
 
         mShoppingCartAdapter.setOnDataChangedListener(new ShoppingCartAdapter.OnDataChangedListener() {
             @Override
-            public void onChosenChanged() {
-                mShoppingCartPresenter.dataStateChanged();
+            public void onChosenChanged(int index) {
+                mShoppingCartPresenterImpl.changeData(index);
             }
 
             @Override
@@ -112,16 +127,17 @@ public class ShoppingCartFragment extends BaseFragment implements ShoppingCartCo
         mShoppingCartAdapter.notifyItemRangeChanged(index, mShoppingCartAdapter.getItemCount() - index);
     }
 
+    @Override
+    public void updateCommodity(int index) {
+        mShoppingCartAdapter.notifyItemChanged(index);
+    }
+
 
     @Override
     public void updateBottomUI(boolean isChosenAll, float totalPrice) {
-        swChooseAll.setOpened(isChosenAll);
+        swChooseAll.toggleSwitch(isChosenAll);
         tvTotalPrice.setText(String.format(getString(R.string.shopping_cart_price_total), NumberUtil.floatToStringWith1Bit(totalPrice)));
     }
 
-    @OnClick(R.id.sw_choose_all)
-    public void onViewClicked() {
-        mShoppingCartPresenter.chooseAllOrNone(swChooseAll.isOpened());
-    }
 
 }

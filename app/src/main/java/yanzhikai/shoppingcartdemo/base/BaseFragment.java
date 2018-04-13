@@ -16,10 +16,10 @@ import yanzhikai.shoppingcartdemo.widget.EmptyLayout;
  * author : yany
  * e-mail : yanzhikai_yjk@qq.com
  * time   : 2018/04/09
- * desc   :
+ * desc   : Fragment基类，目前主要是绑定各种状态的View，如加载中，网络错误等
  */
 
-public abstract class BaseFragment extends Fragment implements IBaseView{
+public abstract class BaseFragment extends Fragment implements BaseView {
 
     @BindView(R.id.empty_layout)
     EmptyLayout mEmptyLayout;

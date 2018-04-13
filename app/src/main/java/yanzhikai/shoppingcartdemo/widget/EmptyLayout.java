@@ -23,7 +23,7 @@ import yanzhikai.shoppingcartdemo.R;
  * @description  表示各种状态的Layout：加载中，无网络，无数据等
  * @author  dangxy99
  * @date   2017/12/23
- * yany:    在原本的基础上增加了可以处理按键，这样就不会把触摸事件传入底下的View
+ * Modified by yany:    在原本的基础上增加了可以处理按键，这样就不会把触摸事件传入底下的View
  */
 public class EmptyLayout extends FrameLayout {
     public static final int STATUS_HIDE = 1001;

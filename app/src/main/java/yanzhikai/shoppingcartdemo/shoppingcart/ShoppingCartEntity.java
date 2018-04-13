@@ -1,4 +1,4 @@
-package yanzhikai.shoppingcartdemo;
+package yanzhikai.shoppingcartdemo.shoppingcart;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * author : yany
  * e-mail : yanzhikai_yjk@qq.com
  * time   : 2018/04/10
- * desc   :
+ * desc   : 购物车数据实体类，这里模拟成json实体
  */
 
 public class ShoppingCartEntity {

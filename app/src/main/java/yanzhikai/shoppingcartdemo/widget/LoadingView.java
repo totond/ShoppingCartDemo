@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import yanzhikai.shoppingcartdemo.DisplayUtil;
+import yanzhikai.shoppingcartdemo.util.DisplayUtil;
 import yanzhikai.shoppingcartdemo.R;
 
 /**
