@@ -11,7 +11,7 @@
  - 列表为空的时候，下面的全选按钮不可选。
  - 最下方的价格合计为选中项目的价格的总和。
 
-###[点击下载Demo](https://github.com/totond/ShoppingCartDemo/blob/master/apk/ShoppingCartDemo.apk)
+### [点击下载Demo](https://github.com/totond/ShoppingCartDemo/blob/master/apk/ShoppingCartDemo.apk)
 
 
 ## 接口简介
