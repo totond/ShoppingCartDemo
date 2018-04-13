@@ -16,7 +16,7 @@ import yanzhikai.shoppingcartdemo.Constant;
  * author : yany
  * e-mail : yanzhikai_yjk@qq.com
  * time   : 2018/04/09
- * desc   : Presenter实现，管理V和P层
+ * desc   : Presenter实现，管理V和P层，模拟请求延时
  */
 
 public class ShoppingCartPresenterImpl implements ShoppingCartContract.IShoppingCarPresenter {
