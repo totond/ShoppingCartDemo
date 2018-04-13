@@ -1,4 +1,5 @@
-![](https://i.imgur.com/E0kx9yI.gif)
+![](https://i.imgur.com/r0CXBAV.gif)
+
 
 # 简介
 　　一个购物车模块的实现Demo，使用MVP架构，M层模拟从服务器获取和处理数据，P层模拟请求延时，View层展示数据，实现了下面的特点：
@@ -83,3 +84,13 @@ interface ShoppingCartDataSource {
 }
 
 ```
+
+## 第三方库使用
+ > 具体使用和修改请看注释。
+
+ - [Rxjava](https://github.com/ReactiveX/RxJava)
+ - [ButterKnife](https://github.com/JakeWharton/butterknife)
+ - [SwipeMenuRecyclerView](https://github.com/AItsuki/SwipeMenuRecyclerView)
+ - [SwitchView](https://github.com/iielse/SwitchButton)
+ - [EmptyLayout](https://github.com/dangxy/WanAndroid/blob/master/app/src/main/java/com/dangxy/wanandroid/base/EmptyLayout.java)
+ - [LoadingView](https://github.com/szhangbiao/EmptyLayout/blob/master/library/src/main/java/com/custom/emptylayout/LoadingView.java)
