@@ -8,7 +8,7 @@ package yanzhikai.shoppingcartdemo.shoppingcart;
  * desc   : model接口
  */
 
-public interface ShoppingCartDataSource {
+interface ShoppingCartDataSource {
 
     //模拟从服务器获取数据
     ShoppingCartEntity getDataFromRemote();
